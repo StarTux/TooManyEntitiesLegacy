@@ -62,7 +62,9 @@ public class TooManyEntitiesPlugin extends JavaPlugin {
                         }
                         EntityType filter = null;
                         if (args.length >= 4) {
-                                filter = EntityType.fromName(args[3].toUpperCase().replaceAll("-", "_"));
+                                try {
+                                        filter = EntityType.valueOf(args[3].toUpperCase().replaceAll("-", "_"));
+                                } catch (IllegalArgumentException iae) {}
                                 if (filter == null) {
                                         sender.sendMessage("" + ChatColor.RED + "Unknown entity type: " + args[3]);
                                         return true;
